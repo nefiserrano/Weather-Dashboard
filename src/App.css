@@ -1,0 +1,81 @@
+/* Center everything and set up smooth transitions */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.5s ease;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Background mappings to your stored assets */
+.default-bg {
+  background: linear-gradient(to bottom, #2c3e50, #3498db);
+}
+
+.clear-bg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./assets/clear.jpg');
+}
+
+.clouds-bg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('./assets/cloudy.png');
+}
+
+.rain-bg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('./assets/rainy.jpg');
+}
+
+/* Card Styling */
+.weather-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(5px);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  margin-top: 20px;
+  min-width: 300px;
+  color: #333;
+}
+
+.weather-card h3 {
+  font-size: 3rem;
+  margin: 10px 0;
+}
+
+/* Input Form Styling */
+input {
+  padding: 12px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px 0 0 25px;
+  outline: none;
+  width: 250px;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 1rem;
+  border: none;
+  background-color: #ff7675;
+  color: white;
+  cursor: pointer;
+  border-radius: 0 25px 25px 0;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background-color: #e17055;
+}
+
+.error-message {
+  color: #ff7675;
+  background: rgba(0,0,0,0.6);
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-top: 15px;
+  font-weight: bold;
+}
