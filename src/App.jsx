@@ -5,16 +5,13 @@ import { motion } from 'framer-motion';
 function App() {
   const [city, setCity] = useState('');
   const [error, setError] = useState('');
-  // New state to hold the actual weather data object from the API
   const [weather, setWeather] = useState(null);
 
-  // Replace YOUR_API_KEY_HERE with your actual OpenWeatherMap API key string
   const API_KEY = import.meta.env.VITE_WEATHER_API_KEY; 
 
   const handleSearch = async (e) => {
     e.preventDefault();
 
-    // Requirement #4: Front-end error checking (empty input)
     if (!city.trim()) {
       setError('Please enter a city name!');
       setWeather(null);
@@ -22,12 +19,10 @@ function App() {
     }
 
     try {
-      // Fetching the data using imperial units (Fahrenheit). Use 'metric' for Celsius.
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${API_KEY}`
       );
 
-      // Requirement #4: API error checking (City not found / 404)
       if (response.status === 404) {
         setError('City not found. Please check your spelling and try again.');
         setWeather(null);
@@ -40,7 +35,6 @@ function App() {
 
       const data = await response.json();
       
-      // If everything passes, clear errors and save the data
       setError('');
       setWeather(data);
     } catch (err) {
@@ -52,18 +46,16 @@ function App() {
   const getWeatherClass = () => {
   if (!weather) return 'default-bg';
   
-  // OpenWeatherMap returns conditions like "Clear", "Clouds", "Rain", "Snow", etc.
   const condition = weather.weather[0].main.toLowerCase();
   
   if (condition.includes('clear')) return 'clear-bg';
   if (condition.includes('cloud')) return 'clouds-bg';
   if (condition.includes('rain') || condition.includes('drizzle')) return 'rain-bg';
   
-  return 'default-bg'; // Fallback for other weather types
+  return 'default-bg';
 };
 
 return (
-  // Update your main wrapper div to use this dynamic class name:
   <div className={`app-container ${getWeatherClass()}`}>
     <h1>Real-Time Weather Dashboard</h1>
     
@@ -80,13 +72,12 @@ return (
     {error && <p className="error-message">{error}</p>}
 
     {weather && !error && (
-      /* We changed 'div' to 'motion.div' and added the animation rules */
       <motion.div 
         key={weather.name}
         className="weather-card"
-        initial={{ opacity: 0, y: 50, scale: 0.9 }}  // Starts invisible, slightly lower, and shrunk
-        animate={{ opacity: 1, y: 0, scale: 1 }}     // Animates to fully visible, normal position
-        transition={{ duration: 0.5, ease: "easeOut" }} // Takes 0.5 seconds with a smooth slowdown
+        initial={{ opacity: 0, y: 50, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <h2>Weather in {weather.name}, {weather.sys.country}</h2>
         <img 
